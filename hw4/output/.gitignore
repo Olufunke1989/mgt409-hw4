@@ -1,0 +1,52 @@
+# ---- Secrets: never commit real environment files or keys ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*secret*
+!**/*secret*.md
+credentials*.json
+
+# ---- Local-only data: database + product images (course data, not redistributed) ----
+data/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# ---- Local test accounts list (contains test passwords) ----
+output/test-accounts.md
+
+# ---- Audit trail backups created if the audit file was ever unreadable ----
+output/audit_trail.unreadable-*.json
+output/.audit-*.json
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Node / frontend build ----
+node_modules/
+frontend/dist/
+*.tsbuildinfo
+.vite/
+
+# ---- Editor / OS / temp ----
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.tmp
+*.swp
+tmp/
+.claude/
