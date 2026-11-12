@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Customs · Site Testing Report</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Plus+Jakarta+Sans:wght@400..800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --yale: #00356b; --electric: #2f5bff; --ink: #15153a; --lavender: #c9b8ff; --lavender-soft: #efe9ff;
+      --coral: #ff6b57; --coral-soft: #ffe3dc; --butter: #ffe08a; --butter-soft: #fff4cf; --mint: #bfead7;
+      --mint-soft: #e7f7ef; --cream: #fff8ee; --muted: #5b5976; --border: rgba(21, 21, 58, 0.12); --ok: #157a52;
+      --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+      --sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --shadow: 0 10px 30px rgba(21, 21, 58, 0.1), 0 30px 60px rgba(21, 21, 58, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background-image: radial-gradient(rgba(21, 21, 58, 0.035) 1px, transparent 1px); background-size: 22px 22px; }
+    .wrap { width: min(1180px, 100% - 3rem); margin: 0 auto; }
+    h1, h2, h3 { font-family: var(--serif); letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 0.5em; font-weight: 600; }
+    em { font-style: italic; font-weight: 400; }
+    a { color: var(--electric); }
+
+    /* Header */
+    .hero { position: relative; overflow: hidden; background: var(--ink); color: #fff; padding: 3.2rem 0 3.6rem; border-radius: 0 0 40px 40px; isolation: isolate; }
+    .hero .blob { position: absolute; border-radius: 50%; z-index: -1; }
+    .brand { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 2.2rem; }
+    .mark { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; background: var(--yale); color: #fff; font-family: var(--serif); font-weight: 700; box-shadow: 4px 4px 0 var(--coral); border: 1px solid rgba(255,255,255,.25); }
+    .brand span { font-family: var(--serif); font-size: 1.4rem; font-weight: 600; }
+    .brand span em { color: var(--lavender); }
+    .eyebrow { text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.74rem; font-weight: 800; color: var(--butter); margin: 0 0 0.8rem; }
+    .hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); color: #fff; max-width: 18ch; }
+    .hero h1 em { color: var(--butter); }
+    .hero p.lead { color: rgba(255,255,255,.82); font-size: 1.1rem; max-width: 62ch; margin: 0 0 1.8rem; }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .meta span { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 999px; padding: 0.4rem 0.9rem; font-size: 0.86rem; font-weight: 600; }
+
+    /* Summary */
+    .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: -2rem auto 0; position: relative; }
+    .sum-card { background: #fff; border: 1px solid var(--border); border-radius: 24px; padding: 1.3rem 1.4rem; box-shadow: var(--shadow); text-decoration: none; color: inherit; display: block; transition: transform .3s; }
+    .sum-card:hover { transform: translateY(-3px); }
+    .sum-card .num { font-family: var(--serif); font-style: italic; color: var(--electric); font-size: 1.8rem; line-height: 1; }
+    .sum-card h3 { font-size: 1.1rem; margin: 0.5rem 0 0.7rem; }
+
+    .badge { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.35rem 0.8rem; border-radius: 999px; background: var(--mint-soft); color: var(--ok); border: 1px solid var(--mint); }
+    .badge::before { content: "✓"; }
+
+    /* Sections */
+    section.test { margin: 4.5rem auto 0; }
+    .test-head { display: flex; justify-content: space-between; align-items: end; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+    .test-head .eyebrow { color: var(--electric); }
+    .test-head h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); margin: 0; }
+    .test-head h2 em { color: var(--coral); }
+    .shot { margin: 0 0 1.6rem; border-radius: 26px; overflow: hidden; background: #fff; border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .shot a { display: block; }
+    .shot img { width: 100%; height: auto; display: block; }
+    .shot figcaption { padding: 0.8rem 1.2rem; font-size: 0.88rem; color: var(--muted); border-top: 1px solid var(--border); background: var(--cream); }
+    .shot figcaption strong { color: var(--ink); }
+    .story { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .panel { border-radius: 22px; padding: 1.4rem 1.5rem; }
+    .panel h3 { font-family: var(--sans); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 800; margin: 0 0 0.6rem; color: var(--muted); }
+    .panel p { margin: 0 0 0.6rem; }
+    .panel p:last-child { margin-bottom: 0; }
+    .p1 { background: var(--lavender-soft); }
+    .p2 { background: var(--butter-soft); }
+    .p3 { background: var(--mint-soft); }
+    .p3 .verdict { font-family: var(--serif); font-size: 1.6rem; color: var(--ok); font-weight: 600; margin-bottom: 0.4rem; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 1.2rem; background: #fff; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; font-size: 0.93rem; }
+    th, td { text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); }
+    th { background: var(--ink); color: #fff; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    tr:last-child td { border-bottom: none; }
+    td.match { color: var(--ok); font-weight: 800; white-space: nowrap; }
+    .two { display: grid; grid-template-columns: 1fr; gap: 1.6rem; }
+    code { background: var(--lavender-soft); padding: 0.1rem 0.4rem; border-radius: 6px; font-size: 0.88em; }
+
+    footer { margin-top: 5rem; background: var(--ink); color: rgba(255,255,255,.8); padding: 2.4rem 0; border-radius: 40px 40px 0 0; font-size: 0.9rem; }
+    footer strong { color: #fff; font-family: var(--serif); font-size: 1.2rem; }
+
+    @media (max-width: 860px) { .summary, .story { grid-template-columns: 1fr; } .summary { margin-top: -1.5rem; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <span class="blob" style="width:320px;height:320px;right:-90px;top:-130px;background:var(--electric)"></span>
+    <span class="blob" style="width:120px;height:120px;right:240px;bottom:-60px;background:var(--coral)"></span>
+    <span class="blob" style="width:60px;height:60px;right:120px;top:150px;background:var(--butter)"></span>
+    <div class="wrap">
+      <div class="brand"><div class="mark">CC</div><span>Campus <em>Customs</em></span></div>
+      <p class="eyebrow">Homework 4 · Problem 11 · Site Testing</p>
+      <h1>Testing report: <em>does it all really work?</em></h1>
+      <p class="lead">
+        I tested three of the most important features on my running Campus Customs website: the chatbot's prices
+        and stock, the chatbot's product search, and the search and filters on the Products page. Every screenshot
+        below is a real capture of the live site, and I checked every number against my <code>campus_customs.db</code> database.
+      </p>
+      <div class="meta">
+        <span>Tested November 12, 2026</span>
+        <span>Site: http://127.0.0.1:5173</span>
+        <span>3 of 3 tests passed</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="summary">
+      <a class="sum-card" href="#test-1"><div class="num">01</div><h3>Chatbot Inventory and Price Check</h3><span class="badge">Passed</span></a>
+      <a class="sum-card" href="#test-2"><div class="num">02</div><h3>Dynamic Product Search Results</h3><span class="badge">Passed</span></a>
+      <a class="sum-card" href="#test-3"><div class="num">03</div><h3>Product Search and Filtering Usability Test</h3><span class="badge">Passed</span></a>
+    </div>
+
+    <!-- ===================== TEST 1 ===================== -->
+    <section class="test" id="test-1">
+      <div class="test-head">
+        <div>
+          <p class="eyebrow">Test 01</p>
+          <h2>Chatbot Inventory and <em>Price Check</em></h2>
+        </div>
+        <span class="badge">Passed</span>
+      </div>
+
+      <figure class="shot">
+        <a href="app_check_images/01_chatbot_price_stock.png" target="_blank"><img src="app_check_images/01_chatbot_price_stock.png" alt="The chatbot answering that the Branford 1/4 zip is $72.00 with 15 in size large" /></a>
+        <figcaption><strong>Screenshot:</strong> I asked about the Branford 1/4 zip in size large, and the chatbot answered with the price and stock. (Click the image to open it full size.)</figcaption>
+      </figure>
+
+      <div class="story">
+        <div class="panel p1">
+          <h3>What I tested</h3>
+          <p>I picked a real product from my catalogue, the <strong>Branford 1/4 Zip</strong>, opened the chat on the homepage, and asked:</p>
+          <p><em>"How much is the Branford 1/4 zip, and how many do you have in size large?"</em></p>
+        </div>
+        <div class="panel p2">
+          <h3>What happened</h3>
+          <p>The chatbot replied: <em>"The Branford 1/4 zip is $72.00, and we have 15 in size large."</em></p>
+          <p>The backend log shows it actually looked this up instead of guessing. First it found the product, then it checked the size L stock.</p>
+        </div>
+        <div class="panel p3">
+          <h3>Result</h3>
+          <p class="verdict">Passed ✓</p>
+          <p>Both the price and the stock number match what's stored in my database.</p>
+        </div>
+      </div>
+
+      <table>
+        <thead><tr><th>Detail</th><th>Chatbot said</th><th>Database says</th><th>Match?</th></tr></thead>
+        <tbody>
+          <tr><td>Product</td><td>Branford 1/4 zip</td><td><code>branford-1-4-zip</code> · "Branford 1 4 Zip"</td><td class="match">✓ Yes</td></tr>
+          <tr><td>Price</td><td>$72.00</td><td><code>price = 72.0</code></td><td class="match">✓ Yes</td></tr>
+          <tr><td>Stock in size L</td><td>15</td><td><code>quantity = 15</code> (size L)</td><td class="match">✓ Yes</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===================== TEST 2 ===================== -->
+    <section class="test" id="test-2">
+      <div class="test-head">
+        <div>
+          <p class="eyebrow">Test 02</p>
+          <h2>Dynamic Product <em>Search Results</em></h2>
+        </div>
+        <span class="badge">Passed</span>
+      </div>
+
+      <div class="two">
+        <figure class="shot">
+          <a href="app_check_images/02_chat_search_cards.png" target="_blank"><img src="app_check_images/02_chat_search_cards.png" alt="Asking 'What hoodies do you have?' and hoodie product cards appearing on the page" /></a>
+          <figcaption><strong>Screenshot 1:</strong> I asked "What hoodies do you have?" in the chat, and matching hoodie cards appeared on the page right away.</figcaption>
+        </figure>
+        <figure class="shot">
+          <a href="app_check_images/02b_card_opens_detail_page.png" target="_blank"><img src="app_check_images/02b_card_opens_detail_page.png" alt="Clicking the Basic Hoodie Big Yale card opened its product page" /></a>
+          <figcaption><strong>Screenshot 2:</strong> Clicking the first card, Basic Hoodie Big Yale, opened the right product page, with its photo, price, colors, sizes and stock.</figcaption>
+        </figure>
+      </div>
+
+      <div class="story">
+        <div class="panel p1">
+          <h3>What I tested</h3>
+          <p>On the Products page I opened the chat and asked <em>"What hoodies do you have?"</em> I wanted to see whether the chatbot would search my real catalogue and show the hoodies as product cards on the website. Then I clicked one of the cards.</p>
+        </div>
+        <div class="panel p2">
+          <h3>What happened</h3>
+          <p>The chatbot said we have <strong>27 hoodies</strong>, from $45.00 to $88.00. A "Results for 'Hoodies'" section appeared right away with <strong>12 cards</strong> (and a "See all 27" button). Each card had its photo, name, price and short description, and all 12 images loaded.</p>
+          <p>This kind of simple question is answered instantly straight from the database (the reply is marked "⚡ Instant answer from our catalogue").</p>
+          <p>Clicking <strong>Basic Hoodie Big Yale</strong> opened <code>/products/basic-hoodie-big-yale</code>.</p>
+        </div>
+        <div class="panel p3">
+          <h3>Result</h3>
+          <p class="verdict">Passed ✓</p>
+          <p>The cards came from my real catalogue, the count and price range match the database, and the card opened the correct product page.</p>
+        </div>
+      </div>
+
+      <table>
+        <thead><tr><th>Check</th><th>On the website</th><th>Database says</th><th>Match?</th></tr></thead>
+        <tbody>
+          <tr><td>Number of hoodies</td><td>27 (12 shown as cards)</td><td>27 products with a hoodie garment type</td><td class="match">✓ Yes</td></tr>
+          <tr><td>Price range</td><td>$45.00 – $88.00</td><td>min 45.0, max 88.0</td><td class="match">✓ Yes</td></tr>
+          <tr><td>First cards' prices</td><td>Basic Hoodie Big Yale $68 · Brooks Brothers Full Zip $88 · Champion Full Zip Hood $88 · Champion Reverse Weave $68</td><td>68.0 · 88.0 · 88.0 · 68.0</td><td class="match">✓ Yes</td></tr>
+          <tr><td>Card images</td><td>12 of 12 loaded</td><td>Paths from <code>image_file_path</code></td><td class="match">✓ Yes</td></tr>
+          <tr><td>Card opens the right page</td><td>Basic Hoodie Big Yale, $68.00</td><td><code>basic-hoodie-big-yale</code>, price 68.0</td><td class="match">✓ Yes</td></tr>
+          <tr><td>Stock on that page</td><td>XS 15 · S 5 · M 5 · L 8 · XL 2 · XXL 25</td><td>XS 15 · S 5 · M 5 · L 8 · XL 2 · XXL 25</td><td class="match">✓ Yes</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===================== TEST 3 ===================== -->
+    <section class="test" id="test-3">
+      <div class="test-head">
+        <div>
+          <p class="eyebrow">Test 03</p>
+          <h2>Product Search and <em>Filtering</em> Usability Test</h2>
+        </div>
+        <span class="badge">Passed</span>
+      </div>
+
+      <figure class="shot">
+        <a href="app_check_images/03_search_and_filters.png" target="_blank"><img src="app_check_images/03_search_and_filters.png" alt="Products page searched for 'hoodie' with size L and $60 to $80 filters, showing 17 products" /></a>
+        <figcaption><strong>Screenshot:</strong> The Products page after searching "hoodie" and choosing size <strong>L</strong> and the <strong>$60 – $80</strong> price range. The active filters show as blue tags, and 17 products are left.</figcaption>
+      </figure>
+
+      <div class="story">
+        <div class="panel p1">
+          <h3>What I tested</h3>
+          <p>This is one of my Problem 9 usability improvements. On the Products page I typed <em>"hoodie"</em> into the search box, then picked <strong>Size L</strong> under "Size in stock" and <strong>$60 – $80</strong> under "Price".</p>
+        </div>
+        <div class="panel p2">
+          <h3>What happened</h3>
+          <p>The results updated on their own after each step, with no need to press Search or reload the page:</p>
+          <p>102 products → <strong>27</strong> after typing "hoodie" → <strong>20</strong> after picking size L → <strong>17</strong> after picking $60 – $80.</p>
+          <p>Each filter showed up as a removable tag, and the count line says "17 products · all $68.00".</p>
+        </div>
+        <div class="panel p3">
+          <h3>Result</h3>
+          <p class="verdict">Passed ✓</p>
+          <p>The numbers at every step match what my database says, and every product left is a hoodie in stock in L between $60 and $80.</p>
+        </div>
+      </div>
+
+      <table>
+        <thead><tr><th>Step</th><th>Products shown</th><th>Database says</th><th>Match?</th></tr></thead>
+        <tbody>
+          <tr><td>No filters</td><td>102</td><td>102 products in the catalogue</td><td class="match">✓ Yes</td></tr>
+          <tr><td>Search "hoodie"</td><td>27</td><td>27 hoodies</td><td class="match">✓ Yes</td></tr>
+          <tr><td>+ Size L in stock</td><td>20</td><td>20 hoodies with size L quantity &gt; 0</td><td class="match">✓ Yes</td></tr>
+          <tr><td>+ Price $60 – $80</td><td>17 (all $68.00)</td><td>17 of those priced over $60 and up to $80</td><td class="match">✓ Yes</td></tr>
+        </tbody>
+      </table>
+      <p style="color:var(--muted);font-size:.9rem;margin-top:1rem">
+        A note on honesty: on my first try, my test script clicked the "$40 – $60" option by mistake (both labels contain "$60"). The site
+        handled that correctly too, showing the one hoodie in that range (Yale Sports Hoodie Tennis, $45), which also matches the database. I then
+        re-ran the test with "$60 – $80" for the final screenshot. Nothing on the site needed fixing.
+      </p>
+    </section>
+
+    <!-- ===================== HOW ===================== -->
+    <section class="test">
+      <div class="test-head"><div><p class="eyebrow">How I tested</p><h2>The <em>fine print</em></h2></div></div>
+      <div class="story">
+        <div class="panel p1"><h3>Real website</h3><p>All tests ran on my live site (React front end + FastAPI backend), using a real Chrome browser that typed and clicked just like a customer would.</p></div>
+        <div class="panel p2"><h3>Real database</h3><p>I compared every price, stock count and product count with direct read-only queries on <code>data/campus_customs.db</code>. The tests didn't change the database.</p></div>
+        <div class="panel p3"><h3>Real screenshots</h3><p>The images in <code>app_check_images/</code> are exactly what the browser showed at 1440×1000 (saved at high resolution). They haven't been edited.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <strong>Campus Customs</strong> · 57 Broadway, New Haven · Testing report for Homework 4, Problem 11
+    </div>
+  </footer>
+</body>
+</html>

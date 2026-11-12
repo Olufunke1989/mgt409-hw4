@@ -1,0 +1,5 @@
+# Campus Customs backend (Python 3.12+). Versions in comments are the ones tested.
+fastapi>=0.115              # tested 0.162.5 – web API
+uvicorn[standard]>=0.30     # tested 0.54.0  – server (also provides websockets, used by tests/site_check)
+pydantic-ai-slim[openai]>=1.0  # tested 2.68.0 – chatbot agent + OpenAI provider
+python-dotenv>=1.0          # tested 1.2.4   – loads .env
