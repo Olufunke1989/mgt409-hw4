@@ -910,6 +910,16 @@ Use website upload
 
 it says thats a lot of files try uploading fewer than 100 at a time
 
+whats next
+
+i only see AI_prompts.md, README.md, requirements.txt, and the backend, frontend, output and tests
+
+where is the repo link?
+
+https://github.com/Olufunke1989/mgt409-hw4/tree/main
+
+done
+
 ### What was missing or needed fixing
 
 - **No git or GitHub setup.** My computer didn't have the GitHub command-line
@@ -953,4 +963,15 @@ it says thats a lot of files try uploading fewer than 100 at a time
   folder, with more than 5,000 files including `node_modules`, `.venv`, the
   database and `.env`. Nothing was committed. The AI renamed the clean folder
   to `UPLOAD-THIS-TO-GITHUB` so the two can't be confused.
+- **Two hidden files didn't upload.** The website upload skipped the two files
+  whose names start with a dot (`.gitignore` and `.env.example`), so I added
+  them on GitHub with "Create new file". The `.gitignore` first landed in
+  `hw4/output/` by mistake, so I moved it up to `hw4/`.
+- **Checking the published repo.** The AI checked the repository through
+  GitHub's public API. It's public, and it has exactly the 58 approved files
+  under `hw4/`. Every file matches the approved copy byte for byte, and there's
+  no `.env`, database, `data/` folder, product photos or `node_modules`.
+- **Final touches.** The README's clone command now uses my real repository
+  link. I uploaded this updated `AI_prompts.md` and `README.md` as the last
+  step.
 

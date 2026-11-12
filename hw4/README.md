@@ -107,8 +107,8 @@ and TypeScript.
 ### 1. Get the code
 
 ```bash
-git clone <this-repository-url>
-cd <repository-folder>/hw4
+git clone https://github.com/Olufunke1989/mgt409-hw4.git
+cd mgt409-hw4/hw4
 ```
 
 ### 2. Add the local-only data
